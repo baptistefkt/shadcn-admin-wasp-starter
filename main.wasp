@@ -1,6 +1,6 @@
 app vibeCodeWasp {
   wasp: {
-    version: "^0.16.3"
+    version: "^0.18.0"
   },
   title: "Vibe Coding with Wasp",
   head: [
@@ -12,6 +12,21 @@ app vibeCodeWasp {
   auth: {
     userEntity: User,
     methods: {
+      // email: {
+      //   // 3. Specify the email from field
+      //   fromField: {
+      //     name: "My App Postman",
+      //     email: "hello@itsme.com"
+      //   },
+      //   // 4. Specify the email verification and password reset options (we'll talk about them later)
+      //   emailVerification: {
+      //     clientRoute: EmailVerificationRoute,
+      //   },
+      //   passwordReset: {
+      //     clientRoute: PasswordResetRoute,
+      //   },
+      // },
+      
       usernameAndPassword: {},
       // google: {},
       // github: {},
@@ -26,6 +41,9 @@ app vibeCodeWasp {
   server: {
     middlewareConfigFn: import { serverMiddlewareFn } from "@src/config/serverSetup",
   },
+  // emailSender: {
+  //   provider: Dummy,
+  // },
 }
 
 //#region Auth Routes
@@ -38,44 +56,58 @@ route LoginRoute { path: "/login", to: Login }
 page Login {
   component: import { Login } from "@src/features/auth/login"
 }
+
+// route RequestPasswordResetRoute { path: "/request-password-reset", to: RequestPasswordResetPage }
+// page RequestPasswordResetPage {
+//   component: import { RequestPasswordReset } from "@src/features/auth/email",
+// }
+
+// route PasswordResetRoute { path: "/password-reset", to: PasswordResetPage }
+// page PasswordResetPage {
+//   component: import { PasswordReset } from "@src/features/auth/email",
+// }
+
+// route EmailVerificationRoute { path: "/email-verification", to: EmailVerificationPage }
+// page EmailVerificationPage {
+//   component: import { EmailVerification } from "@src/features/auth/email",
+// }
 //#endregion
 
 route DashboardRoute { path: "/", to: Dashboard }
 page Dashboard {
+  authRequired: true,
   component: import Dashboard from "@src/features/dashboard/index"
 }
 
 route ChatsRoute { path: "/chats", to: Chats }
 page Chats {
+  authRequired: true,
   component: import Chats from "@src/features/chats/index"
 }
 
 route TasksRoute { path: "/tasks", to: Tasks }
 page Tasks {
+  authRequired: true,
   component: import Tasks from "@src/features/tasks/index"
 }
 
 route AppsRoute { path: "/apps", to: Apps }
 page Apps {
+  authRequired: true,
   component: import Apps from "@src/features/apps/index"
 }
 
 route UsersRoute { path: "/users", to: Users }
 page Users {
+  authRequired: true,
   component: import Users from "@src/features/users/index"
 }
 
 route SettingsRoute { path: "/settings/*", to: Settings }
 page Settings {
+  authRequired: true,
   component: import Settings from "@src/features/settings/index"
 }
-
-// TODO: add route
-// route HelpCenterRoute { path: "/help-center", to: HelpCenter }
-// page HelpCenter {
-//   component: import { HelpCenter } from "@src/features/help-center/index"
-// }
-
 
 //#region Error Routes
 route GeneralErrorRoute { path: "/500", to: GeneralError }

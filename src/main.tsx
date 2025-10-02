@@ -18,7 +18,13 @@ export default function Main() {
   const isAuthPage = useMemo(() => {
     const path = location.pathname;
     // Add more routes to auth pages here
-    const authPaths = [routes.LoginRoute.to, routes.SignupRoute.to] as string[];
+    const authPaths = [
+      routes.LoginRoute.to,
+      routes.SignupRoute.to,
+      // routes.RequestPasswordResetRoute.to,
+      // routes.PasswordResetRoute.to,
+      // routes.EmailVerificationRoute.to
+    ] as string[];
     return authPaths.includes(path);
   }, [location.pathname]);
   return (
