@@ -21,21 +21,21 @@ export default function Main() {
     const authPaths = [
       routes.LoginRoute.to,
       routes.SignupRoute.to,
-      // routes.RequestPasswordResetRoute.to,
-      // routes.PasswordResetRoute.to,
-      // routes.EmailVerificationRoute.to
+      routes.RequestPasswordResetRoute.to,
+      routes.PasswordResetRoute.to,
+      routes.EmailVerificationRoute.to,
     ] as string[];
     return authPaths.includes(path);
   }, [location.pathname]);
   return (
-    <ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       <FontProvider>
         <SearchProvider>
           <SidebarProvider defaultOpen={true}>
             <SkipToMain />
             {!isAuthPage && <AppSidebar />}
             <div
-              id='content'
+              id="content"
               className={cn(
                 'ml-auto w-full max-w-full',
                 'peer-data-[state=collapsed]:w-[calc(100%-var(--sidebar-width-icon)-1rem)]',
@@ -43,7 +43,7 @@ export default function Main() {
                 'transition-[width] duration-200 ease-linear',
                 'flex h-svh flex-col',
                 'group-data-[scroll-locked=1]/body:h-full',
-                'group-data-[scroll-locked=1]/body:has-[main.fixed-main]:h-svh'
+                'group-data-[scroll-locked=1]/body:has-[main.fixed-main]:h-svh',
               )}
             >
               <Outlet />

@@ -16,7 +16,7 @@
  * tailwind.config.js  → Add 'roboto' to the `font` array
  * ```ts
  * const fonts = ['inter', 'manrope', 'roboto']
- * 
+ *
  * theme: {
  *   // other configs
  *   extend: {
@@ -29,4 +29,4 @@
  * }
  * ```
  */
-export const fonts = ['inter', 'manrope', 'system'] as const
+export const fonts = ['inter', 'manrope', 'system'] as const;

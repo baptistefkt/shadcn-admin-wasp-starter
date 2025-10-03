@@ -18,9 +18,9 @@ import {
   IconUserCog,
   IconUserOff,
   IconUsers,
-} from '@tabler/icons-react'
-import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
-import { type SidebarData } from '../types'
+} from '@tabler/icons-react';
+import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react';
+import { type SidebarData } from '../types';
 
 export const sidebarData: SidebarData = {
   user: {
@@ -181,4 +181,4 @@ export const sidebarData: SidebarData = {
       ],
     },
   ],
-}
+};

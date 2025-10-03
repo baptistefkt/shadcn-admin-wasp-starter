@@ -9,13 +9,20 @@ export function useTheme() {
 
   useEffect(() => {
     // Check if the system preference is dark
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const systemPrefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)',
+    ).matches;
 
     // Get the stored theme preference
     const storedTheme = localStorage.getItem('vite-ui-theme');
 
     // Determine effective theme
-    const effectiveTheme = storedTheme === 'system' ? (systemPrefersDark ? 'dark' : 'light') : storedTheme;
+    const effectiveTheme =
+      storedTheme === 'system'
+        ? systemPrefersDark
+          ? 'dark'
+          : 'light'
+        : storedTheme;
 
     // Set colors based on effective theme
     if (effectiveTheme === 'dark') {
@@ -31,7 +38,6 @@ export function useTheme() {
         submitButtonText: 'white',
       });
     }
-
   }, []);
 
   return { colors };

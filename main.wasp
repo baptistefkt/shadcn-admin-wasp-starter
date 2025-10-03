@@ -12,22 +12,22 @@ app vibeCodeWasp {
   auth: {
     userEntity: User,
     methods: {
-      // email: {
-      //   // 3. Specify the email from field
-      //   fromField: {
-      //     name: "My App Postman",
-      //     email: "hello@itsme.com"
-      //   },
-      //   // 4. Specify the email verification and password reset options (we'll talk about them later)
-      //   emailVerification: {
-      //     clientRoute: EmailVerificationRoute,
-      //   },
-      //   passwordReset: {
-      //     clientRoute: PasswordResetRoute,
-      //   },
-      // },
+      email: {
+        // 3. Specify the email from field (must match the sender verified in SendGrid)
+        fromField: {
+          name: "Wasp",
+          email: "sendgrid.component207@passmail.net"
+        },
+        // 4. Specify the email verification and password reset options (we'll talk about them later)
+        emailVerification: {
+          clientRoute: EmailVerificationRoute,
+        },
+        passwordReset: {
+          clientRoute: PasswordResetRoute,
+        },
+      },
       
-      usernameAndPassword: {},
+      // usernameAndPassword: {},
       // google: {},
       // github: {},
     },
@@ -41,9 +41,10 @@ app vibeCodeWasp {
   server: {
     middlewareConfigFn: import { serverMiddlewareFn } from "@src/config/serverSetup",
   },
-  // emailSender: {
-  //   provider: Dummy,
-  // },
+  emailSender: {
+    // provider: SendGrid,
+    provider: Dummy, // Use Dummy for development/testing, don't forget to set SKIP_EMAIL_VERIFICATION_IN_DEV=true in .env.server
+  },
 }
 
 //#region Auth Routes
@@ -57,20 +58,20 @@ page Login {
   component: import { Login } from "@src/features/auth/login"
 }
 
-// route RequestPasswordResetRoute { path: "/request-password-reset", to: RequestPasswordResetPage }
-// page RequestPasswordResetPage {
-//   component: import { RequestPasswordReset } from "@src/features/auth/email",
-// }
+route RequestPasswordResetRoute { path: "/request-password-reset", to: RequestPasswordResetPage }
+page RequestPasswordResetPage {
+  component: import { RequestPasswordReset } from "@src/features/auth/email",
+}
 
-// route PasswordResetRoute { path: "/password-reset", to: PasswordResetPage }
-// page PasswordResetPage {
-//   component: import { PasswordReset } from "@src/features/auth/email",
-// }
+route PasswordResetRoute { path: "/password-reset", to: PasswordResetPage }
+page PasswordResetPage {
+  component: import { PasswordReset } from "@src/features/auth/email",
+}
 
-// route EmailVerificationRoute { path: "/email-verification", to: EmailVerificationPage }
-// page EmailVerificationPage {
-//   component: import { EmailVerification } from "@src/features/auth/email",
-// }
+route EmailVerificationRoute { path: "/email-verification", to: EmailVerificationPage }
+page EmailVerificationPage {
+  component: import { EmailVerification } from "@src/features/auth/email",
+}
 //#endregion
 
 route DashboardRoute { path: "/", to: Dashboard }
